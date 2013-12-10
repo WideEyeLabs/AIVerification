@@ -65,7 +65,7 @@ static char verifyDelegateKey;
 - (void)verifyItIsAnEmailAddress
 {
     VerificationTest *verifier = [self verifyDelegate];
-    [self verifyItIsAnEmailAddressWithError:[NSString stringWithFormat:@"The %@ field must be a valid email address",
+    [self verifyItIsAnEmailAddressWithError:[NSString stringWithFormat:@"The %@ field must be a valid email address.",
                                     [verifier stringRepresentationForVerifyField:self]]];
 }
 
