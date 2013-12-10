@@ -19,6 +19,8 @@
 {
     [super viewDidLoad];
     
+// Example Change
+    
     NSArray *errors = [VerificationTest forInputs:@{} andTestCases:^(VerificationTest *inspect) {
         [inspect[@"Name"] verifyItIsLongerThan:@5];
         [inspect[@"Email"] verifyItIsAnEmailAddressWithError:@"MAKE IT AN EMAIL ADDY!"];
