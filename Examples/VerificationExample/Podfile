@@ -1,0 +1,4 @@
+link_with ['VerificationExample', 'VerificationExampleTests']
+platform :ios, '7.0'
+
+ pod 'AIVerification', :path => '../../'

@@ -1,0 +1,14 @@
+PODS:
+  - AIVerification (1.0.0)
+
+DEPENDENCIES:
+  - AIVerification (from `../../`)
+
+EXTERNAL SOURCES:
+  AIVerification:
+    :path: ../../
+
+SPEC CHECKSUMS:
+  AIVerification: ad40e5cdb13731ad36a611aad972af204e76ae70
+
+COCOAPODS: 0.27.1
