@@ -1,2 +1,2 @@
 language: objective-c
-script: xctool -workspace Examples/VerificationExample/VerificationExample.xcworkspace -scheme VerificationExample test -sdk iphonesimulator
+script: xctool -workspace Examples/VerificationExample/VerificationExample.xcworkspace -scheme VerificationExample test -sdk iphonesimulator -freshInstall -freshSimulator
