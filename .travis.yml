@@ -1,5 +1,4 @@
 language: objective-c
 before_install:
     - brew update
-    - brew install xctool
 script: xctool -workspace Examples/VerificationExample/VerificationExample.xcworkspace -scheme VerificationExample test -sdk iphonesimulator
