@@ -1,2 +1,7 @@
 language: objective-c
+before_install:
+    - cd Examples/VerificationExample/
+    - pod install
+    - cd ..
+    - cd ..
 script: xctool -workspace Examples/VerificationExample/VerificationExample.xcworkspace -scheme VerificationExample test -sdk iphonesimulator
