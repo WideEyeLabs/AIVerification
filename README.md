@@ -1,5 +1,7 @@
 [![Build
 Status](https://travis-ci.org/WideEyeLabs/AIVerification.png)](https://travis-ci.org/WideEyeLabs/AIVerification)
+
+
 AIVerification is a testing library for verifying user inputs.
 
 ## How To Get Started
@@ -19,7 +21,7 @@ for testing are accesible.
 
 // ..
 // ..
-NSDictionary *inputViews = @{ @"Name" : self.nameField, @"Password" : self.passwordField, @"Confirmation" : self.confirmationField };
+NSDictionary *inputViews = @{ @"Name" : _nameField, @"Password" : _passwordField, @"Confirmation" : _confirmationField };
 NSString *passwordText = self.passwordField.text;
 
 NSArray *errors = [VerificationTest forInputs:inputViews andTestCases:^(VerificationTest *inspect) {
