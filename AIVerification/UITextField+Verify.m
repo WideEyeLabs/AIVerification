@@ -79,6 +79,7 @@ static char verifyDelegateKey;
     {
         [verifier verificationFailedWithError:error];
     }
+    [self removeVerifyDelegate];
 }
 
 - (void)verifyItIsLongerThan:(NSNumber *)length withError:(NSString *)error
@@ -88,6 +89,7 @@ static char verifyDelegateKey;
     {
         [verifier verificationFailedWithError:error];
     }
+    [self removeVerifyDelegate];
 }
 
 - (void)verifyItIsANumberWithError:(NSString *)error
@@ -100,6 +102,7 @@ static char verifyDelegateKey;
     {
         [verifier verificationFailedWithError:error];
     }
+    [self removeVerifyDelegate];
 }
 
 - (void)verifyItMatches:(NSString *)stringToMatch withError:(NSString *)error
@@ -109,6 +112,7 @@ static char verifyDelegateKey;
     {
         [verifier verificationFailedWithError:error];
     }
+    [self removeVerifyDelegate];
 }
 
 - (void)verifyItIsAnEmailAddressWithError:(NSString *)error
@@ -120,6 +124,7 @@ static char verifyDelegateKey;
     {
         [verifier verificationFailedWithError:error];
     }
+    [self removeVerifyDelegate];
 }
 
 @end
