@@ -1,24 +1,40 @@
-AtomicUI is a simple interface object library built on top of [Masonry](https://github.com/cloudkite/Masonry).
+AIVerification is a testing library for verifying user inputs.
 
 ## How To Get Started
 
-AtomicUI can be installed via CocoaPods by adding "pod 'AtomicUI', git: 'https://github.com/WideEyeLabs/AtomicUI.git'" to your Podfile.
+Install [CocoaPods](http://github.com/CocoaPods/CocoaPods) and in your Podfile
+>`pod 'AIVerification', git: 'https://github.com/WideEyeLabs/AIVerification.git`
 
-### AtomSlideController
+### Using AIVerification
 
+After importing the AIVerification header, all of the methods required
+for testing are accesible.
+
+## Example
 
 ```objective-c
-#import <AtomSlideController.h>
+#import <AIVerification.h>
 
 // ..
 // ..
+NSDictionary *inputViews = @{ @"Name" : self.nameField, @"Password" : self.passwordField, @"Confirmation" : self.confirmationField };
+NSString *passwordText = self.passwordField.text;
 
-id appDel = [[UIApplication sharedApplication] delegate];
-AtomSlideController *slide = [appDel slideController];
-[slide closeSlide];
-[slide startIndicator];
-
-[self performAsyncRequest:^()completion {
-  [slide stopIndicator];
+NSArray *errors = [VerificationTest forInputs:inputViews andTestCases:^(VerificationTest *inspect) {
+  [inspect[@"Name"] verifyItIsNotEmpty];
+  [inspect[@"Password"] verifyItIsLongerThan:@6];
+  [inspect[@"Confirmation"] verifyItMatches:passwordText withDescription:@"Password Field"];
 }];
+
+if ([errors count] != 0)
+{
+  // handle errors
+  NSString *errorMessage = [errors componentsJoinedByString:@"\n\n"];
+}
+else
+{
+  // proceed
+}
 ```
+
+
