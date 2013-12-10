@@ -12,6 +12,8 @@
 @interface VerificationExampleTests : XCTestCase
 
 @property (strong, nonatomic) UITableView *unselectedTable;
+@property (strong, nonatomic) UITextField *validEmailField;
+@property (strong, nonatomic) UITextField *invalidEmailField;
 @property (strong, nonatomic) UITextField *emptyField;
 @property (strong, nonatomic) UITextField *numberField;
 @property (strong, nonatomic) UITextField *fiveCharField;
@@ -19,11 +21,22 @@
 
 @end
 
+#define kNoArrayErrorMessage @"No array was returned."
+#define kWrongErrorMessage @"The error generated is not correct."
+#define kErrorIncorrectlyGenerated @"An error was incorrectly generated."
+#define kWrongNumberOFErrors @"The inspection generated an incorrect number of errors."
+
 @implementation VerificationExampleTests
 
 - (void)setUp
 {
     [super setUp];
+    
+    _validEmailField = [[UITextField alloc] init];
+    _validEmailField.text = @"valid_email@example.com";
+    
+    _invalidEmailField = [[UITextField alloc] init];
+    _invalidEmailField.text = @"nope@be.c";
     
     _emptyField = [[UITextField alloc] init];
     
@@ -32,10 +45,11 @@
     
     _fiveCharField = [[UITextField alloc] init];
     [_fiveCharField setText:@"5char"];
+
     
     _unselectedTable = [[UITableView alloc] init];
     
-    _inputFields = @{@"empty": _emptyField, @"5char": _fiveCharField, @"number": _numberField};
+    _inputFields = @{@"validEmail" : _validEmailField, @"invalidEmail" : _invalidEmailField, @"empty": _emptyField, @"5char": _fiveCharField, @"number": _numberField};
 }
 
 - (void)tearDown
@@ -49,9 +63,9 @@
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
         [inspect[@"5char"] verifyItIsNotEmpty];
     }];
-    
-    XCTAssertNotNil(errors, @"No array was returned.");
-    XCTAssert([errors count] == 0, @"An error was incorrectly generated.");
+
+    XCTAssertNotNil(errors, kNoArrayErrorMessage);
+    XCTAssert([errors count] == 0, kErrorIncorrectlyGenerated);
 }
 
 - (void)testFieldNotEmptyFailure
@@ -60,9 +74,9 @@
         [inspect[@"empty"] verifyItIsNotEmpty];
     }];
     
-    XCTAssertNotNil(errors, @"No array was returned.");
-    XCTAssert([errors count] == 1, @"The inspection generated an incorrect amount of errors.");
-    XCTAssert([@"The empty field must not be empty." isEqualToString:(NSString *)errors[0]], @"The error generated is not correct.");
+    XCTAssertNotNil(errors, kNoArrayErrorMessage);
+    XCTAssert([errors count] == 1, kWrongNumberOFErrors);
+    XCTAssert([@"The empty field must not be empty." isEqualToString:(NSString *)errors[0]], kWrongErrorMessage);
 }
 
 - (void)testFieldLengthSuccess
@@ -71,8 +85,8 @@
         [inspect[@"5char"] verifyItIsLongerThan:@4];
     }];
     
-    XCTAssertNotNil(errors, @"No array was returned.");
-    XCTAssert([errors count] == 0, @"An error was incorrectly generated.");
+    XCTAssertNotNil(errors, kNoArrayErrorMessage);
+    XCTAssert([errors count] == 0, kErrorIncorrectlyGenerated);
 }
 
 - (void)testFieldLengthFailure
@@ -81,9 +95,44 @@
         [inspect[@"5char"] verifyItIsLongerThan:@6];
     }];
     
-    XCTAssertNotNil(errors, @"No array was returned.");
-    XCTAssert([errors count] == 1, @"The inspection generated an incorrect amount of errors.");
-    XCTAssert([@"The 5char field must be longer than 6 characters." isEqualToString:(NSString *)errors[0]], @"The error generated is not correct.");
+    XCTAssertNotNil(errors, kNoArrayErrorMessage);
+    XCTAssert([errors count] == 1, kWrongNumberOFErrors);
+    XCTAssert([@"The 5char field must be longer than 6 characters." isEqualToString:(NSString *)errors[0]], kWrongErrorMessage);
 }
 
+- (void)testThatAValidEmailPassesVerification
+{
+    NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
+        [inspect[@"validEmail"] verifyItIsAnEmailAddress];
+    }];
+    
+    XCTAssertNotNil(errors, kNoArrayErrorMessage);
+    XCTAssert([errors count] == 0, kErrorIncorrectlyGenerated);
+}
+
+- (void)testThatAnInvalidEmailFailsVerification
+{
+    NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
+        [inspect[@"invalidEmail"] verifyItIsAnEmailAddress];
+    }];
+    
+    XCTAssertNotNil(errors, kNoArrayErrorMessage);
+    XCTAssert([errors count] == 1, kWrongNumberOFErrors);
+    XCTAssert([@"The invalidEmail field must be a valid email address." isEqualToString:(NSString *)errors[0]], kWrongErrorMessage);
+}
+
+- (void)testThatMultipleVerificationsPreserveOrder
+{
+    NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
+        [inspect[@"empty"] verifyItIsNotEmpty];
+        [inspect[@"5char"] verifyItIsLongerThan:@6];
+        [inspect[@"invalidEmail"] verifyItIsAnEmailAddress];
+    }];
+    
+    XCTAssertNotNil(errors, kNoArrayErrorMessage);
+    XCTAssert([errors count] == 3, kWrongNumberOFErrors);
+    XCTAssert([@"The empty field must not be empty." isEqualToString:(NSString *)errors[0]], kWrongErrorMessage);
+    XCTAssert([@"The 5char field must be longer than 6 characters." isEqualToString:(NSString *)errors[1]], kWrongErrorMessage);
+    XCTAssert([@"The invalidEmail field must be a valid email address." isEqualToString:(NSString *)errors[2]], kWrongErrorMessage);
+}
 @end
