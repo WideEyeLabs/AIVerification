@@ -1,3 +1,5 @@
+[![Build
+Status](https://travis-ci.org/WideEyeLabs/AIVerification.png)](https://travis-ci.org/WideEyeLabs/AIVerification)
 AIVerification is a testing library for verifying user inputs.
 
 ## How To Get Started
