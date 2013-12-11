@@ -62,7 +62,7 @@
     [super tearDown];
 }
 
-- (void)testFieldNotEmptySuccess
+- (void)testThatANonEmptyFieldPasses
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
         [inspect[@"5char"] verifyItIsNotEmpty];
@@ -72,7 +72,7 @@
     XCTAssert([errors count] == 0, kErrorIncorrectlyGenerated);
 }
 
-- (void)testFieldNotEmptyFailure
+- (void)testThatAnEmptyFieldFails
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
         [inspect[@"empty"] verifyItIsNotEmpty];
@@ -83,7 +83,7 @@
     XCTAssert([@"The empty field must not be empty." isEqualToString:(NSString *)errors[0]], kWrongErrorMessage);
 }
 
-- (void)testFieldLengthSuccess
+- (void)testThatALongEnoughFieldPasses
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
         [inspect[@"5char"] verifyItIsLongerThan:@4];
@@ -93,7 +93,7 @@
     XCTAssert([errors count] == 0, kErrorIncorrectlyGenerated);
 }
 
-- (void)testFieldLengthFailure
+- (void)testThatATooShortFieldFails
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
         [inspect[@"5char"] verifyItIsLongerThan:@6];
