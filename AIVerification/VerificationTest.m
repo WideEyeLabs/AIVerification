@@ -37,6 +37,16 @@
     return verifier.errors;
 }
 
+- (VerificationTextField *)textField
+{
+    return [[VerificationTextField alloc] initWithTest:self];
+}
+
+- (VerificationTableView *)tableView
+{
+    return [[VerificationTableView alloc] initWithTest:self];
+}
+
 - (id)objectForKeyedSubscript:(id)key
 {
     id fieldForReturn = _inputsToVerify[key];
