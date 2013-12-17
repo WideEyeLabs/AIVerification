@@ -12,9 +12,6 @@
 
 @interface UITableView (Verify)
 
-- (void)setVerifyDelegate:(VerificationTest *)delegate;
-- (void)removeVerifyDelegate;
-
 - (void)verifyARowIsSelected;
 
 @end

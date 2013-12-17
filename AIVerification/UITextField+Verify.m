@@ -7,30 +7,13 @@
 //
 
 #import <objc/runtime.h>
+#import "UIView+Verify.h"
 #import "UITextField+Verify.h"
 #import "VerificationTest.h"
 
 #define kEmailRegEXP @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
 
-static char verifyDelegateKey;
-
 @implementation UITextField (Verify)
-
-- (void)setVerifyDelegate:(VerificationTest *)delegate
-{
-    objc_setAssociatedObject(self, &verifyDelegateKey, delegate, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (VerificationTest *)verifyDelegate
-{
-    return (VerificationTest *)objc_getAssociatedObject(self, &verifyDelegateKey);
-}
-
-- (void)removeVerifyDelegate
-{
-    objc_removeAssociatedObjects(self);
-}
-
 
 #pragma mark -- Simple API
 

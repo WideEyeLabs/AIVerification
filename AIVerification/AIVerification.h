@@ -6,5 +6,6 @@
 //
 
 #import "VerificationTest.h"
+#import "VerificationTextField.h"
 #import "UITableView+Verify.h"
 #import "UITextField+Verify.h"

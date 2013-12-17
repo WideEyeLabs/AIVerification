@@ -65,7 +65,7 @@
 - (void)testThatANonEmptyFieldPasses
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"5char"] verifyItIsNotEmpty];
+        [inspect.textField[@"5char"] verifyItIsNotEmpty];
     }];
 
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
