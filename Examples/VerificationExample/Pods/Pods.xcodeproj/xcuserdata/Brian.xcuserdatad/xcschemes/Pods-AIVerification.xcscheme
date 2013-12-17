@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AEB42C332CDB4BFEAB830FAB"
+               BlueprintIdentifier = "525ED1A49A994EABAE5CAF35"
                BuildableName = "libPods-AIVerification.a"
                BlueprintName = "Pods-AIVerification"
                ReferencedContainer = "container:Pods.xcodeproj">
