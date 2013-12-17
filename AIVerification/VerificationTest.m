@@ -7,6 +7,11 @@
 //
 
 #import "VerificationTest.h"
+#import "VerificationTextField.h"
+#import "VerificationTableView.h"
+#import "UIView+Verify.h"
+#import "UITextField+Verify.h"
+#import "UITableView+Verify.h"
 
 @interface VerificationTest()
 

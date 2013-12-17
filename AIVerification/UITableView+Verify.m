@@ -7,27 +7,11 @@
 //
 
 #import <objc/runtime.h>
+#import "UIView+Verify.h"
 #import "VerificationTest.h"
 #import "UITableView+Verify.h"
 
-static char verifyDelegateKey;
-
 @implementation UITableView (Verify)
-
-- (void)setVerifyDelegate:(VerificationTest *)delegate
-{
-    objc_setAssociatedObject(self, &verifyDelegateKey, delegate, OBJC_ASSOCIATION_RETAIN);
-}
-
-- (VerificationTest *)verifyDelegate
-{
-    return (VerificationTest *)objc_getAssociatedObject(self, &verifyDelegateKey);
-}
-
-- (void)removeVerifyDelegate
-{
-    objc_removeAssociatedObjects(self);
-}
 
 - (void)verifyARowIsSelected
 {

@@ -12,9 +12,6 @@
 
 @interface UITextField (Verify)
 
-- (void)setVerifyDelegate:(VerificationTest *)delegate;
-- (void)removeVerifyDelegate;
-
 // Default Error Messages
 - (void)verifyItIsNotEmpty;
 - (void)verifyItIsLongerThan:(NSNumber *)length;

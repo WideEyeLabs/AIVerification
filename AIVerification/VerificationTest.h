@@ -7,10 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "VerificationTextField.h"
-#import "VerificationTableView.h"
-#import "UITextField+Verify.h"
-#import "UITableView+Verify.h"
 
 @interface VerificationTest : NSObject
 
