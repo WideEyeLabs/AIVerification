@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+@class VerificationTableView;
+@class VerificationTextField;
+
 @interface VerificationTest : NSObject
 
 @property (strong, nonatomic) NSDictionary *inputsToVerify;
@@ -15,8 +18,8 @@
 
 + (NSArray *)forInputs:(NSDictionary *)inputs andTestCases:(void(^)(VerificationTest *inspect))inspections;
 
-- (id)textField;
-- (id)tableView;
+- (VerificationTextField *)textField;
+- (VerificationTableView *)tableView;
 - (id)objectForKeyedSubscript:(id <NSCopying>)key;
 - (NSString *)stringRepresentationForVerifyField:(id)field;
 - (void)verificationFailedWithError:(NSString *)error;

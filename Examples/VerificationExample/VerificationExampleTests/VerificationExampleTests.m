@@ -75,7 +75,7 @@
 - (void)testThatAnEmptyFieldFails
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"empty"] verifyItIsNotEmpty];
+        [inspect.textField[@"empty"] verifyItIsNotEmpty];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
@@ -86,7 +86,7 @@
 - (void)testThatALongEnoughFieldPasses
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"5char"] verifyItIsLongerThan:@4];
+        [inspect.textField[@"5char"] verifyItIsLongerThan:@4];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
@@ -96,7 +96,7 @@
 - (void)testThatATooShortFieldFails
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"5char"] verifyItIsLongerThan:@6];
+        [inspect.textField[@"5char"] verifyItIsLongerThan:@6];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
@@ -107,7 +107,7 @@
 - (void)testThatAValidEmailPasses
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"validEmail"] verifyItIsAnEmailAddress];
+        [inspect.textField[@"validEmail"] verifyItIsAnEmailAddress];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
@@ -117,7 +117,7 @@
 - (void)testThatAnInvalidEmailFails
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"invalidEmail"] verifyItIsAnEmailAddress];
+        [inspect.textField[@"invalidEmail"] verifyItIsAnEmailAddress];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
@@ -129,7 +129,7 @@
 {
     NSString *stringToMatch = _fiveCharField.text;
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"matching"] verifyItMatches:stringToMatch withDescription:@"5charfield"];
+        [inspect.textField[@"matching"] verifyItMatches:stringToMatch withDescription:@"5charfield"];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
@@ -140,7 +140,7 @@
 {
     NSString *stringToMatch = _numberField.text;
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"matching"] verifyItMatches:stringToMatch withDescription:@"number field"];
+        [inspect.textField[@"matching"] verifyItMatches:stringToMatch withDescription:@"number field"];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
@@ -151,9 +151,9 @@
 - (void)testThatMultipleVerificationsPreserveOrder
 {
     NSArray *errors = [VerificationTest forInputs:_inputFields andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"empty"] verifyItIsNotEmpty];
-        [inspect[@"5char"] verifyItIsLongerThan:@6];
-        [inspect[@"invalidEmail"] verifyItIsAnEmailAddress];
+        [inspect.textField[@"empty"] verifyItIsNotEmpty];
+        [inspect.textField[@"5char"] verifyItIsLongerThan:@6];
+        [inspect.textField[@"invalidEmail"] verifyItIsAnEmailAddress];
     }];
     
     XCTAssertNotNil(errors, kNoArrayErrorMessage);
