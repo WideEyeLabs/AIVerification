@@ -22,9 +22,9 @@
 // Example Change
     
     NSArray *errors = [VerificationTest forInputs:@{} andTestCases:^(VerificationTest *inspect) {
-        [inspect[@"Name"] verifyItIsLongerThan:@5];
-        [inspect[@"Email"] verifyItIsAnEmailAddressWithError:@"MAKE IT AN EMAIL ADDY!"];
-        [inspect[@"Another"] verifyItIsLongerThan:@3 withError:@"The length field must be longer than 3"];
+        [inspect.tableView[@"Name"] verifyARowIsSelected];
+        [inspect.textField[@"Email"] verifyItIsAnEmailAddressWithError:@"MAKE IT AN EMAIL ADDY!"];
+        [inspect.textField[@"Another"] verifyItIsLongerThan:@3 withError:@"The length field must be longer than 3"];
     }];
     
     if ([errors count] != 0) {
