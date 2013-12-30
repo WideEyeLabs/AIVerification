@@ -14,37 +14,36 @@ Objective-C, which automates and simplifies the process of using
 
 ```ruby
 platform :ios, '7.0'
-pod 'AIVerification', git: 'https://github.com/WideEyeLabs/AIVerification.git`
+pod 'AIVerification', git: 'https://github.com/WideEyeLabs/AIVerification.git'
 ```
 
 ### About AIVerification
 
-After importing the AIVerification header, you can access all of the
-methods required for testing. Verifications are simple human readable assertions that generate error messages to be returned at the end of the testing block. The syntax should be used as follows...
+To get started simply import the AIVerification header (#import <AIVerification.h>). Verifications are simple human readable assertions that test the state of subclasses of UIView. After it has run, a VerificationTest generates error messages for each of the assertions that failed which can then be displayed to the user. The following is an example test with a single assertion...
 ````objective-c
-NSArray *errors = [VerificationTest 
-forInputs:inputViews 
-andTestCases:^(VerificationTest *inspect) {
+NSArray *errors = [VerificationTest forInputs:inputViews 
+        andTestCases:^(VerificationTest *inspect) {
   [inspect.textField[@"Name"] verifyItIsNotEmpty];
 }];
 // Full example below
 ```
-If the test fails, the errors array will be populated with error
-messages that can be displayed to the user.  These errors can be
-customized by calling the verification methods that also take an NSString
-error argument.
+If the assertion in this test fails, the errors array will be populated with the error
+string "The Name field must not be empty". Error messages can be
+customized by calling the verification methods that also takes an NSString
+error as an argument (e.g., verifiyItIsNotEmptyWithError:(NSString)).
 
-Because it is a framework of testing objects instead of a subclass of UITextField, AIVerification plays well with any subclasses of UITextField you may want to include in your project.
+Because it is a framework that tests by inspecting objects instead of using subclassing, AIVerification plays well with any UIView subclasses you may want to include in your project (try [JVFloatLabeledTextField](https://github.com/jverdi/JVFloatLabeledTextField)).
 
 ### "Is This For Me?"
 
-Known about shortfalls of this framework include...
+Of course you need more information to determine if this will be useful to you. Here are some points about AIVerification to consider.
 
-- No callbacks to natively support continuous testing (try [TSValidatedTextField](https://github.com/appunite/TSValidatedTextField))
-- Verification methods are only meangingful when called from within a test block.
-- The set of verification methods is currently very limited.
+- No callbacks to support continuous testing on changes to inputs (try [TSValidatedTextField](https://github.com/appunite/TSValidatedTextField))
+- Verification assertions are only meangingful when called from within a test block (they currently have a void return).
+- The set of verification assertions is currently very limited. However,
+  adding new ones is a fairly simple task.
 
-## Example
+## Full Example
 
 ```objective-c
 #import <AIVerification.h>
@@ -52,18 +51,17 @@ Known about shortfalls of this framework include...
 // ..
 // ..
 NSDictionary *inputViews = @{ @"Name" : _nameField, 
-@"Password" : _passwordField, 
-@"Confirmation" : _confirmationField };
+        @"Password" : _passwordField, 
+        @"Confirmation" : _confirmationField };
 
 NSString *passwordText = self.passwordField.text;
 
-NSArray *errors = [VerificationTest 
-forInputs:inputViews 
-andTestCases:^(VerificationTest *inspect) {
+NSArray *errors = [VerificationTest forInputs:inputViews 
+        andTestCases:^(VerificationTest *inspect) {
   [inspect.textField[@"Name"] verifyItIsNotEmpty];
   [inspect.textField[@"Password"] verifyItIsLongerThan:@6];
   [inspect.textField[@"Confirmation"] verifyItMatches:passwordText 
-withDescription:@"Password Field"];
+          withDescription:@"Password Field"];
 }];
 
 if ([errors count] != 0)
