@@ -19,7 +19,7 @@ pod 'AIVerification', git: 'https://github.com/WideEyeLabs/AIVerification.git'
 
 ### About AIVerification
 
-To get started simply import the AIVerification header (#import <AIVerification.h>). Verifications are simple human readable assertions that test the state of subclasses of UIView. After it has run, a VerificationTest generates error messages for each of the assertions that failed which can then be displayed to the user. The following is an example test with a single assertion...
+To get started simply import the AIVerification header (AIVerification.h). Verifications are simple human readable assertions that test the state of subclasses of UIView. After it has run, a VerificationTest generates error messages for each of the assertions that failed which can then be displayed to the user. The following is an example test with a single assertion...
 ````objective-c
 NSArray *errors = [VerificationTest forInputs:inputViews 
         andTestCases:^(VerificationTest *inspect) {
@@ -29,7 +29,7 @@ NSArray *errors = [VerificationTest forInputs:inputViews
 ```
 If the assertion in this test fails, the errors array will be populated with the error
 string "The Name field must not be empty". Error messages can be
-customized by calling the verification methods that also takes an NSString
+customized by calling verification methods that also take an NSString
 error as an argument (e.g., verifiyItIsNotEmptyWithError:(NSString)).
 
 Because it is a framework that tests by inspecting objects instead of using subclassing, AIVerification plays well with any UIView subclasses you may want to include in your project (try [JVFloatLabeledTextField](https://github.com/jverdi/JVFloatLabeledTextField)).
@@ -38,8 +38,8 @@ Because it is a framework that tests by inspecting objects instead of using subc
 
 Of course you need more information to determine if this will be useful to you. Here are some points about AIVerification to consider.
 
-- No callbacks to support continuous testing on changes to inputs (try [TSValidatedTextField](https://github.com/appunite/TSValidatedTextField))
-- Verification assertions are only meangingful when called from within a test block (they currently have a void return).
+- There are no callbacks to support continuous testing on changes to inputs (try [TSValidatedTextField](https://github.com/appunite/TSValidatedTextField))
+- Verification assertions, such as 'verifyItIsNotEmpty', are only meangingful when called from within a test block (they currently have a void return).
 - The set of verification assertions is currently very limited. However,
   adding new ones is a fairly simple task.
 
